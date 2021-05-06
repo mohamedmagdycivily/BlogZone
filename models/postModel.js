@@ -20,12 +20,12 @@ const postSchema = new mongoose.Schema(
       trim: true,
       required: [true, "A post must have a description"],
     },
-    photo: { type: String, default: "/public/img/tours/tour-1-1.jpg" },
+    photo: { type: String, default: "tour-1-1.jpg" },
     tags: [String],
     createdAt: {
       type: Date,
       default: Date.now(),
-      select: false,
+      select: true,
     },
     author: {
       type: mongoose.Schema.ObjectId,

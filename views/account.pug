@@ -1,31 +1,8 @@
 extends base
 
-mixin navItem(link, text, icon, active)
-  li(class=`${active ? 'side-nav--active' : ''}`)
-    a(href=`${link}`)
-      svg
-        use(xlink:href=`img/icons.svg#icon-${icon}`)
-      | #{text}
-
 block content
   main.main
     .user-view
-      nav.user-view__menu
-        ul.side-nav
-          +navItem('#', 'Settings', 'settings', true)
-          +navItem('#', 'My bookings', 'briefcase')
-          +navItem('#', 'My reviews', 'star')
-          +navItem('#', 'Billing', 'credit-card')
-
-        - if (user.role === 'admin')
-          .admin-nav
-            h5.admin-nav__heading Admin
-            ul.side-nav
-              +navItem('#', 'Manage tours', 'map')
-              +navItem('#', 'Manage users', 'users')
-              +navItem('#', 'Manage reviews', 'star')
-              +navItem('#', 'Manage bookings', 'briefcase')
-
       .user-view__content
         .user-view__form-container
           h2.heading-secondary.ma-bt-md Your account settings

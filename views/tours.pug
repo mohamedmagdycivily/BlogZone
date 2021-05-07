@@ -4,7 +4,7 @@ block content
   main.main
     .card-container
       //- have title, body, photo, author, and tags
-      each tour in tours
+      each tour, i in tours
         .card
           .card__header
             .card__picture
@@ -21,21 +21,27 @@ block content
               svg.card__icon
                 use(xlink:href='/img/icons.svg#icon-map-pin')
               span= tour.tags
+            //- .card__data
+            //-   svg.card__icon
+            //-     use(xlink:href='/img/icons.svg#icon-calendar')
+            //-     span= tour.createdAt.toLocaleString('en-us', {month: 'long', year: 'numeric'})
             .card__data
               svg.card__icon
                 use(xlink:href='/img/icons.svg#icon-calendar')
-                span= tour.createdAt.toLocaleString('en-us', {month: 'long', year: 'numeric'})
+              span
+                a.remove(href=`/edit/${tour.slug}`) Edit
             .card__data
               svg.card__icon
                 use(xlink:href='/img/icons.svg#icon-flag')
-              //- span= `${tour.locations.length} stops`
               span
                 a.remove(href=`/tour/${tour.slug}`) Read more
-              
             .card__data
               svg.card__icon
                 use(xlink:href='/img/icons.svg#icon-user')
-              span= tour.author.name
+              span 
+                a.remove.clickListen(data-index-number=`${tour._id}` href=`#`) Delete
+
+              
 
           //- .card__footer
             //- p

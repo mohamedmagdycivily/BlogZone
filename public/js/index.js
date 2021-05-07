@@ -3,12 +3,14 @@ import "@babel/polyfill";
 import { displayMap } from "./mapbox";
 import { login, logout } from "./login";
 import { updateSettings } from "./updateSettings";
+import { deleteTourFunc } from "./deleteTour";
 // DOM ELEMENTS
 const mapBox = document.getElementById("map");
 const loginForm = document.querySelector(".form--login");
 const logOutBtn = document.querySelector(".nav__el--logout");
 const userDataForm = document.querySelector(".form-user-data");
 const userPasswordForm = document.querySelector(".form-user-password");
+const deleteTour = document.querySelectorAll(".clickListen");
 
 // DELEGATION
 if (mapBox) {
@@ -25,6 +27,11 @@ if (loginForm)
   });
 
 if (logOutBtn) logOutBtn.addEventListener("click", logout);
+if (deleteTour) {
+  deleteTour.forEach((a) => {
+    a.addEventListener("click", deleteTourFunc);
+  });
+}
 
 if (userDataForm) {
   userDataForm.addEventListener("submit", (e) => {

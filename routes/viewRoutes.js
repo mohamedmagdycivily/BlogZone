@@ -7,10 +7,17 @@ const router = express.Router();
 router.get("/", authController.isLoggedIn, viewsController.getOverview);
 router.get("/tour/:slug", authController.isLoggedIn, viewsController.getTour);
 router.get(
-  "/myTours/:id",
+  "/myPosts/:id",
   authController.isLoggedIn,
   viewsController.getMyTours
 );
+router.get("/edit/:slug", authController.isLoggedIn, viewsController.editTour);
+// router.get(
+//   "/delete/:slug",
+//   authController.isLoggedIn,
+//   viewsController.deleteTour
+// );
+
 router.get("/login", authController.isLoggedIn, viewsController.getLoginForm);
 router.get("/me", authController.protect, viewsController.getAccount);
 

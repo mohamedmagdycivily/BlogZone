@@ -48,7 +48,6 @@ postSchema.pre("save", function(next) {
 
 // QUERY MIDDLEWARE
 postSchema.pre(/^find/, function(next) {
-  console.log("in populate");
   this.populate({
     path: "author",
     select: "name",

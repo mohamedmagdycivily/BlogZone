@@ -1,0 +1,49 @@
+extends base
+
+block content
+  main.main
+    .card-container
+      //- have title, body, photo, author, and tags
+      each tour in tours
+        .card
+          .card__header
+            .card__picture
+              .card__picture-overlay &nbsp;
+              img.card__picture-img(src=`/img/tours/${tour.photo}`, alt=`${tour.name}`)
+            h3.heading-tertirary
+              span= tour.title
+
+          .card__details
+            h1.card__sub-heading= tour.author.name
+            -text = tour.body.split('.')[0] + ' .....'
+            p.card__text= text
+            .card__data
+              svg.card__icon
+                use(xlink:href='/img/icons.svg#icon-map-pin')
+              span= tour.tags
+            .card__data
+              svg.card__icon
+                use(xlink:href='/img/icons.svg#icon-calendar')
+                span= tour.createdAt.toLocaleString('en-us', {month: 'long', year: 'numeric'})
+            .card__data
+              svg.card__icon
+                use(xlink:href='/img/icons.svg#icon-flag')
+              //- span= `${tour.locations.length} stops`
+              span
+                a.remove(href=`/tour/${tour.slug}`) Read more
+              
+            .card__data
+              svg.card__icon
+                use(xlink:href='/img/icons.svg#icon-user')
+              span= tour.author.name
+
+          //- .card__footer
+            //- p
+            //-   span.card__footer-value= `$${tour.price}`
+              
+            //-   span.card__footer-text per person
+            //- p.card__ratings
+            //-   span.card__footer-value
+              
+            //-   span.card__footer-text 
+            //- a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) Details

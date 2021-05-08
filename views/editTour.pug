@@ -7,37 +7,29 @@ block append head
 
 block content
   main.main
-    .card-container
-        //- have title, body, photo, author, and tags
-     
-        .card
-          .card__header
-            .card__picture
-              .card__picture-overlay &nbsp;
-              img.card__picture-img(src=`/img/tours/${tour.photo}`, alt=`${tour.name}`)
-            h3.heading-tertirary
-              span= tour.title
+    .user-view
+      .user-view__content
+        .user-view__form-container
+          h2.heading-secondary.ma-bt-md Your account settings
+          
 
-          .card__details
-            h1.card__sub-heading= tour.author.name
-            -text = tour.body
-            p.card__text= text
-            .card__data
-              svg.card__icon
-                use(xlink:href='/img/icons.svg#icon-map-pin')
-              span= tour.tags
-            .card__data
-              svg.card__icon
-                use(xlink:href='/img/icons.svg#icon-calendar')
-                span= tour.createdAt.toLocaleString('en-us', {month: 'long', year: 'numeric'})
-            .card__data
-              svg.card__icon
-                use(xlink:href='/img/icons.svg#icon-flag')
-              //- span= `${tour.locations.length} stops`
-              span
-                a.remove(href=`/`) Back
+          form.form.form-user-data
+            .form__group
+              label.form__label(for='title') Title
+              input#name.form__input(type='text', value=`${tour.title}`, required, name='title')
+            .form__group
+              label.form__label(for='body') Body
+              textarea#name.form__input(rows="6" ,cols="50", required, name='body')= tour.body
+              //- input#name.form__input(type='', value=`${tour.title}`, required, name='title')
+            .form__group
+              label.form__label(for='tags') Tags
+              input#name.form__input(type='text', value=`${tour.tags}`, required, name='tags')
+            .form__group.form__photo-upload
+              img.formImage(src=`/img/tours/${tour.photo}`, alt='User photo')
+              input.form__upload(type='file', accept='image/*', id='photo', name='photo')
+              label(for='photo') Choose new photo
               
-            .card__data
-              svg.card__icon
-                use(xlink:href='/img/icons.svg#icon-user')
-              span= tour.author.name
+            .form__group.right
+              button.btn.btn--small.btn--green Save post
+              
+        .line &nbsp;

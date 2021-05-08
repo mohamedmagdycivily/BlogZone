@@ -2,33 +2,37 @@ extends base
 include _reviewCard
 
 block append head
-  script(src='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js')
-  link(href='https://api.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet')
 
 block content
   main.main
     .user-view
       .user-view__content
         .user-view__form-container
-          h2.heading-secondary.ma-bt-md Your account settings
+          h2.heading-secondary.ma-bt-md= tour.title
           
 
-          form.form.form-user-data
+          form.form.form-post-data
             .form__group
               label.form__label(for='title') Title
-              input#name.form__input(type='text', value=`${tour.title}`, required, name='title')
+              input#title.form__input(data-index-number=`${tour._id}` ,type='text', value=`${tour.title}`, required, name='title')
             .form__group
               label.form__label(for='body') Body
-              textarea#name.form__input(rows="6" ,cols="50", required, name='body')= tour.body
+              textarea#body.form__input(rows="6" ,cols="50", required, name='body')= tour.body
               //- input#name.form__input(type='', value=`${tour.title}`, required, name='title')
             .form__group
               label.form__label(for='tags') Tags
-              input#name.form__input(type='text', value=`${tour.tags}`, required, name='tags')
+              input#tags.form__input(type='text', value=`${tour.tags}`, required, name='tags')
             .form__group.form__photo-upload
-              img.formImage(src=`/img/tours/${tour.photo}`, alt='User photo')
-              input.form__upload(type='file', accept='image/*', id='photo', name='photo')
-              label(for='photo') Choose new photo
+              img.formImage(src=`/img/tours/${tour.photo}`, alt='Post photo')
+              input.form__upload(type='file', accept='image/*', id='image', name='image')
+              label(for='image') Choose new photo
               
+              //- .form__group.form__photo-upload
+              //- img.form__user-photo(src=`/img/users/${user.photo}`, alt='User photo')
+              //- input.form__upload(type='file', accept='image/*', id='photo', name='photo')
+              //- label(for='photo') Choose new photo
+
+
             .form__group.right
               button.btn.btn--small.btn--green Save post
               

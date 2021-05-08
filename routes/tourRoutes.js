@@ -1,6 +1,8 @@
 const express = require("express");
 const tourController = require("./../controllers/tourController");
 const authController = require("./../controllers/authController");
+const userController = require("./../controllers/userController");
+
 // const reviewRouter = require('./../routes/reviewRoutes');
 
 const router = express.Router();
@@ -56,5 +58,13 @@ router
     // authController.restrictTo('admin', 'lead-guide'),
     tourController.deleteTour
   );
+
+router.patch(
+  "/edit/:id",
+  tourController.getMe,
+  tourController.uploadUserPhoto,
+  tourController.resizeUserPhoto,
+  tourController.updatePost
+);
 
 module.exports = router;

@@ -42,12 +42,20 @@ postSchema.index({ slug: 1 });
 
 // DOCUMENT MIDDLEWARE: runs before .save() and .create()
 postSchema.pre("save", function(next) {
+  console.log("postSchema preee");
   this.slug = slugify(this.title, { lower: true });
   next();
 });
 
+// postSchema.post(/^findOneAnd/, function(doc, next) {
+//   console.log("in findOneAnd");
+//   this.slug = slugify(doc.title, { lower: true });
+//   next();
+// });
+
 // QUERY MIDDLEWARE
 postSchema.pre(/^find/, function(next) {
+  console.log("postSchema last");
   this.populate({
     path: "author",
     select: "name",

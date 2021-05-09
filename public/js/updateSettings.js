@@ -11,6 +11,9 @@ export const updateSettings = async (data, type) => {
       console.log(id);
       url = `http://127.0.0.1:3000/api/v1/posts/edit/${id}`;
     }
+    if (type === "create") {
+      url = `http://127.0.0.1:3000/api/v1/posts`;
+    }
     if (type === "password")
       url = "http://127.0.0.1:3000/api/v1/users/updateMyPassword";
     if (type === "data") url = "http://127.0.0.1:3000/api/v1/users/updateMe";

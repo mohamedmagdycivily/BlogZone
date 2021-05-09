@@ -7,7 +7,7 @@ const postSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: [true, "A post must have a name"],
+      required: [true, "A post must have a title"],
       // unique: true,
       trim: true,
       maxlength: [40, "A post name must have less or equal then 40 characters"],
@@ -42,7 +42,7 @@ postSchema.index({ slug: 1 });
 
 // DOCUMENT MIDDLEWARE: runs before .save() and .create()
 postSchema.pre("save", function(next) {
-  console.log("postSchema preee");
+  // console.log("postSchema preee");
   this.slug = slugify(this.title, { lower: true });
   next();
 });
@@ -55,7 +55,7 @@ postSchema.pre("save", function(next) {
 
 // QUERY MIDDLEWARE
 postSchema.pre(/^find/, function(next) {
-  console.log("postSchema last");
+  // console.log("postSchema last");
   this.populate({
     path: "author",
     select: "name",

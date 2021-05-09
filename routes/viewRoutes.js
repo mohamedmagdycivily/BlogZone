@@ -3,12 +3,12 @@ const viewsController = require("../controllers/viewsController");
 const authController = require("../controllers/authController");
 
 const router = express.Router();
-
 router.get("/", authController.isLoggedIn, viewsController.getOverview);
 router.get("/tour/:slug", authController.isLoggedIn, viewsController.getTour);
 router.get(
   "/myPosts/:id",
-  authController.isLoggedIn,
+  authController.protect,
+  // authController.isLoggedIn,
   viewsController.getMyTours
 );
 router.get("/edit/:slug", authController.isLoggedIn, viewsController.editTour);
@@ -26,6 +26,7 @@ router.post(
   authController.protect,
   viewsController.updateUserData
 );
-// console.log("router = ", router);
 
 module.exports = router;
+
+router.get("/create-post", authController.protect, viewsController.createPost);

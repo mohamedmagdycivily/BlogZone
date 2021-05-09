@@ -38,8 +38,8 @@ const sendErrorDev = (err, req, res) => {
   }
 
   // B) RENDERED WEBSITE
-  console.error("ERROR 💥", err);
-  // console.error("ERROR 💥", err.message);
+  // console.error("ERROR 💥", err);
+  console.error("ERROR 💥", err.message);
   return res.status(err.statusCode).render("error", {
     title: "Something went wrong!",
     msg: err.message,
@@ -58,8 +58,8 @@ const sendErrorProd = (err, req, res) => {
     }
     // B) Programming or other unknown error: don't leak error details
     // 1) Log error
-    console.error("ERROR 💥", err);
-    // console.error("ERROR 💥", err.message);
+    // console.error("ERROR 💥", err);
+    console.error("ERROR 💥", err.message);
     // 2) Send generic message
     return res.status(500).json({
       status: "error",
@@ -70,7 +70,7 @@ const sendErrorProd = (err, req, res) => {
   // B) RENDERED WEBSITE
   // A) Operational, trusted error: send message to client
   if (err.isOperational) {
-    console.log(err);
+    console.log(err.message);
     return res.status(err.statusCode).render("error", {
       title: "Something went wrong!",
       msg: err.message,
@@ -78,8 +78,8 @@ const sendErrorProd = (err, req, res) => {
   }
   // B) Programming or other unknown error: don't leak error details
   // 1) Log error
-  console.error("ERROR 💥", err);
-  // console.error("ERROR 💥", err.message);
+  // console.error("ERROR 💥", err);
+  console.error("ERROR 💥", err.message);
   // 2) Send generic message
   return res.status(err.statusCode).render("error", {
     title: "Something went wrong!",
@@ -89,7 +89,7 @@ const sendErrorProd = (err, req, res) => {
 
 module.exports = (err, req, res, next) => {
   // console.log(err.stack);
-  console.log("err11 = ", err);
+  // console.log("err11 = ", err);
   console.log("err.message = ", err.message);
 
   err.statusCode = err.statusCode || 500;

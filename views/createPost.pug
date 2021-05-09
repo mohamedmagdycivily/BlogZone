@@ -1,0 +1,39 @@
+extends base
+include _reviewCard
+
+block append head
+
+block content
+  main.main
+    .user-view
+      .user-view__content
+        .user-view__form-container
+          h2.heading-secondary.ma-bt-md title
+          
+
+          form.form.form-createPost-data
+            .form__group
+              label.form__label(for='title') Title
+              input#title.form__input(type='text', required, name='title')
+            .form__group
+              label.form__label(for='body') Body
+              textarea#body.form__input(rows="6" ,cols="50", required, name='body')
+              //- input#name.form__input(type='', value=`${tour.title}`, required, name='title')
+            .form__group
+              label.form__label(for='tags') Tags
+              input#tags.form__input(type='text' , required, name='tags')
+            .form__group.form__photo-upload
+              img.formImage(src=`/img/tours/tour-5-3.jpg`, alt='Post photo')
+              input.form__upload(type='file', accept='image/*', id='image', name='image')
+              label(for='image') Choose new photo
+              
+              //- .form__group.form__photo-upload
+              //- img.form__user-photo(src=`/img/users/${user.photo}`, alt='User photo')
+              //- input.form__upload(type='file', accept='image/*', id='photo', name='photo')
+              //- label(for='photo') Choose new photo
+
+
+            .form__group.right
+              button.btn.btn--small.btn--green Save post
+              
+        .line &nbsp;

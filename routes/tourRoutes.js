@@ -41,8 +41,10 @@ router
   .post(
     authController.protect,
     // authController.restrictTo('admin', 'lead-guide'),
+    tourController.uploadUserPhoto,
+    tourController.resizeUserPhoto,
     tourController.setUserId,
-    tourController.createTour
+    tourController.createPost
   );
 
 router
@@ -61,6 +63,7 @@ router
 
 router.patch(
   "/edit/:id",
+  authController.protect,
   tourController.getMe,
   tourController.uploadUserPhoto,
   tourController.resizeUserPhoto,

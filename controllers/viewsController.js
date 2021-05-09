@@ -34,7 +34,7 @@ exports.getTour = catchAsync(async (req, res, next) => {
 exports.getMyTours = catchAsync(async (req, res, next) => {
   // 1) Get the data, for the requested tour (including reviews and guides)
   // console.log("req.params.id =", req.params.id);
-  const tours = await Tour.find({ author: req.params.id }).sort("-createdAt");
+  const tours = await Tour.find({ author: req.user.id }).sort("-createdAt");
 
   if (!tours) {
     return next(new AppError("There is no posts", 404));
@@ -59,8 +59,14 @@ exports.editTour = catchAsync(async (req, res, next) => {
   // 2) Build template
   // 3) Render template using data from 1)
   res.status(200).render("editTour", {
-    title: `${tour.title} Tour`,
+    title: `${tour.title} Post`,
     tour,
+  });
+});
+
+exports.createPost = catchAsync(async (req, res, next) => {
+  res.status(200).render("createPost", {
+    title: `createPost`,
   });
 });
 

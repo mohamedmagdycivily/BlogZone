@@ -113,3 +113,43 @@ exports.getAllUsers = factory.getAll(User);
 // Do NOT update passwords with this!
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
+
+exports.updateFollowers = catchAsync(async (req, res, next) => {
+  // console.log("req.body = ", req.body);
+  // console.log("req.user.id= ", req.user.id);
+  const user = await User.findById(req.user.id);
+  const following = [...user.following, req.body.following];
+  let doc;
+  if (user.following.indexOf(req.body.following) >= 1) {
+    console.log("un following ...");
+    doc = await User.findByIdAndUpdate(
+      req.user.id,
+      { $pull: { following: req.body.following } },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+  } else {
+    console.log("following ...");
+    doc = await User.findByIdAndUpdate(
+      req.user.id,
+      { $push: { following: req.body.following } },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+  }
+
+  if (!doc) {
+    return next(new AppError("No document found with that ID", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      data: doc,
+    },
+  });
+});

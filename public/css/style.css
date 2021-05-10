@@ -1334,3 +1334,8 @@ body {
   color: green;
   text-decoration: none; /* no underline */
 }
+.followButton {
+  width: 25%;
+  margin-bottom: -40px;
+  /* margin-top: -20px; */
+}

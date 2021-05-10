@@ -47,10 +47,12 @@ const userSchema = new mongoose.Schema(
       default: true,
       select: false,
     },
-    following: {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-    },
+    following: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+      },
+    ],
     // posts: {
     //   type: mongoose.Schema.ObjectId,
     //   ref: "Post",

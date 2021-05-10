@@ -34,7 +34,7 @@ exports.getTour = catchAsync(async (req, res, next) => {
 exports.getMyTours = catchAsync(async (req, res, next) => {
   // 1) Get the data, for the requested tour (including reviews and guides)
   // console.log("req.params.id =", req.params.id);
-  const tours = await Tour.find({ author: req.user.id }).sort("-createdAt");
+  const tours = await Tour.find({ author: req.params.id }).sort("-createdAt");
 
   if (!tours) {
     return next(new AppError("There is no posts", 404));

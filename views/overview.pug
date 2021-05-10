@@ -35,15 +35,5 @@ block content
             .card__data
               svg.card__icon
                 use(xlink:href='/img/icons.svg#icon-user')
-              span= tour.author.name
-
-          //- .card__footer
-            //- p
-            //-   span.card__footer-value= `$${tour.price}`
-              
-            //-   span.card__footer-text per person
-            //- p.card__ratings
-            //-   span.card__footer-value
-              
-            //-   span.card__footer-text 
-            //- a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) Details
+              span
+                a.remove(href=`/myPosts/${tour.author.id}`)= tour.author.name

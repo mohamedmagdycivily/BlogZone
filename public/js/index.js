@@ -5,6 +5,7 @@ import { login, logout } from "./login";
 import { updateSettings } from "./updateSettings";
 import { deleteTourFunc } from "./deleteTour";
 import { createPost } from "./createPost";
+import { followHandler } from "./follow";
 
 // DOM ELEMENTS
 const mapBox = document.getElementById("map");
@@ -15,6 +16,7 @@ const postDataForm = document.querySelector(".form-post-data");
 const createPostDataForm = document.querySelector(".form-createPost-data");
 const userPasswordForm = document.querySelector(".form-user-password");
 const deleteTour = document.querySelectorAll(".clickListen");
+const followButton = document.querySelector(".followButton");
 
 // DELEGATION
 if (mapBox) {
@@ -96,3 +98,7 @@ if (userPasswordForm)
     document.getElementById("password").value = "";
     document.getElementById("password-confirm").value = "";
   });
+
+if (followButton) {
+  followButton.addEventListener("click", followHandler);
+}

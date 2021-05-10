@@ -3,7 +3,16 @@ extends base
 block content
   main.main
     .card-container
-      //- have title, body, photo, author, and tags
+      if tours && user.id != tours[0].author.id 
+        if user.following.indexOf(tours[0].author.id ) >= 0
+          button.btn.btn--small.btn--green.followButton(data-id=`${tours[0].author.id }` )= `UnFollow ${tours[0].author.name}`
+        else 
+          button.btn.btn--small.btn--green.followButton(data-id=`${tours[0].author.id }` )= `Follow ${tours[0].author.name}`
+      //- h1= user.following.includes(tours[0].author.id )
+      //- - console.log("user.following = ", user.following)
+      //- - console.log("tours[0].author.id = ", tours[0].author.id )
+      //- - console.log(user.following.indexOf(tours[0].author.id ) >= 0 )
+      //- - console.log(user.following[1]==(tours[0].author.id ) )
       each tour, i in tours
         .card
           .card__header
@@ -28,8 +37,9 @@ block content
             .card__data
               svg.card__icon
                 use(xlink:href='/img/icons.svg#icon-calendar')
-              span
-                a.remove(href=`/edit/${tour.slug}`) Edit
+              if user.id == tour.author.id 
+                span
+                  a.remove(href=`/edit/${tour.slug}`) Edit
             .card__data
               svg.card__icon
                 use(xlink:href='/img/icons.svg#icon-flag')
@@ -38,8 +48,9 @@ block content
             .card__data
               svg.card__icon
                 use(xlink:href='/img/icons.svg#icon-user')
-              span 
-                a.remove.clickListen(data-index-number=`${tour._id}` href=`#`) Delete
+              if user.id == tour.author.id 
+                span 
+                  a.remove.clickListen(data-index-number=`${tour._id}` href=`#`) Delete
 
               
 

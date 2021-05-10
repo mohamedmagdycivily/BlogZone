@@ -22,6 +22,11 @@ router.patch(
   userController.resizeUserPhoto,
   userController.updateMe
 );
+router.patch(
+  "/updateFollowers",
+  authController.protect,
+  userController.updateFollowers
+);
 router.delete("/deleteMe", userController.deleteMe);
 
 router.use(authController.restrictTo("admin"));

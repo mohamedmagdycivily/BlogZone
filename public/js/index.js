@@ -106,14 +106,28 @@ if (signUpForm)
     e.preventDefault();
     document.querySelector(".btn--save-account").textContent = "signing up...";
 
-    const name = document.getElementById("name_create").value;
-    const email = document.getElementById("email_create").value;
-    // const photo = document.getElementById("photo").files[0];
-    const password = document.getElementById("password_create").value;
-    const passwordConfirm = document.getElementById("password_confirm_create")
-      .value;
+    const form = new FormData();
+    form.append("name", document.getElementById("name_create").value);
+    form.append("email", document.getElementById("email_create").value);
+    form.append("photo", document.getElementById("photo").files[0]);
+    form.append("password", document.getElementById("password_create").value);
+    form.append(
+      "passwordConfirm",
+      document.getElementById("password_confirm_create").value
+    );
 
-    await createAcc({ name, email, password, passwordConfirm }, "create");
+    // const name = document.getElementById("name_create").value;
+    // const email = document.getElementById("email_create").value;
+    // const photo = document.getElementById("photo").files[0];
+    // const password = document.getElementById("password_create").value;
+    // const passwordConfirm = document.getElementById("password_confirm_create")
+    //   .value;
+
+    await createAcc(
+      // { name, email, photo, password, passwordConfirm },
+      form,
+      "create"
+    );
 
     // document.querySelector(".btn--save-password").textContent = "Save password";
     // document.getElementById("password-current").value = "";

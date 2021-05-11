@@ -34,15 +34,15 @@ exports.uploadUserPhoto = upload.single("photo");
 
 exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
-
-  req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
-
+  if (req.user) req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+  else req.file.filename = `user-${Date.now()}.jpeg`;
+  console.log("end of resizeUserPhoto");
   await sharp(req.file.buffer)
     .resize(500, 500)
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
     .toFile(`public/img/users/${req.file.filename}`);
-
+  console.log("end of resizeUserPhoto");
   next();
 });
 

@@ -9141,27 +9141,30 @@ function () {
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee2(e) {
-    var name, email, password, passwordConfirm;
+    var form;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             e.preventDefault();
             document.querySelector(".btn--save-account").textContent = "signing up...";
-            name = document.getElementById("name_create").value;
-            email = document.getElementById("email_create").value; // const photo = document.getElementById("photo").files[0];
+            form = new FormData();
+            form.append("name", document.getElementById("name_create").value);
+            form.append("email", document.getElementById("email_create").value);
+            form.append("photo", document.getElementById("photo").files[0]);
+            form.append("password", document.getElementById("password_create").value);
+            form.append("passwordConfirm", document.getElementById("password_confirm_create").value); // const name = document.getElementById("name_create").value;
+            // const email = document.getElementById("email_create").value;
+            // const photo = document.getElementById("photo").files[0];
+            // const password = document.getElementById("password_create").value;
+            // const passwordConfirm = document.getElementById("password_confirm_create")
+            //   .value;
 
-            password = document.getElementById("password_create").value;
-            passwordConfirm = document.getElementById("password_confirm_create").value;
-            _context2.next = 8;
-            return (0, _createAcc.createAcc)({
-              name: name,
-              email: email,
-              password: password,
-              passwordConfirm: passwordConfirm
-            }, "create");
+            _context2.next = 10;
+            return (0, _createAcc.createAcc)( // { name, email, photo, password, passwordConfirm },
+            form, "create");
 
-          case 8:
+          case 10:
           case "end":
             return _context2.stop();
         }

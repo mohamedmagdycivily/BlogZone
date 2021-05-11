@@ -39,6 +39,14 @@ const createSendToken = (user, statusCode, res) => {
 exports.signup = catchAsync(async (req, res, next) => {
   console.log("signup 🧑 ");
   let newUser;
+  let data = {
+    name: req.body.name,
+    email: req.body.email,
+    role: "admin",
+    password: req.body.password,
+    passwordConfirm: req.body.passwordConfirm,
+  };
+  if (req.file) data.photo = req.file.filename;
   // if (req.body.role) {
   //   console.log("in if ");
   //   newUser = await User.create({
@@ -50,13 +58,8 @@ exports.signup = catchAsync(async (req, res, next) => {
   //   });
   // } else {
   //   console.log("in else ");
-  newUser = await User.create({
-    name: req.body.name,
-    email: req.body.email,
-    role: "admin",
-    password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm,
-  });
+  newUser = await User.create(data);
+  console.log("data🧮  = ", data);
   console.log("newUser = ", newUser);
   // }
 

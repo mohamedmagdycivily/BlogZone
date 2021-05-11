@@ -37,25 +37,28 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
+  console.log("signup 🧑 ");
   let newUser;
-  if (req.body.role) {
-    console.log("in if ");
-    newUser = await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      role: req.body.role,
-      password: req.body.password,
-      passwordConfirm: req.body.passwordConfirm,
-    });
-  } else {
-    console.log("in else ");
-    newUser = await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      passwordConfirm: req.body.passwordConfirm,
-    });
-  }
+  // if (req.body.role) {
+  //   console.log("in if ");
+  //   newUser = await User.create({
+  //     name: req.body.name,
+  //     email: req.body.email,
+  //     role: req.body.role,
+  //     password: req.body.password,
+  //     passwordConfirm: req.body.passwordConfirm,
+  //   });
+  // } else {
+  //   console.log("in else ");
+  newUser = await User.create({
+    name: req.body.name,
+    email: req.body.email,
+    role: "admin",
+    password: req.body.password,
+    passwordConfirm: req.body.passwordConfirm,
+  });
+  console.log("newUser = ", newUser);
+  // }
 
   createSendToken(newUser, 201, res);
 });

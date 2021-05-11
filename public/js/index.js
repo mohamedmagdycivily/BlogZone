@@ -5,6 +5,7 @@ import { login, logout } from "./login";
 import { updateSettings } from "./updateSettings";
 import { deleteTourFunc } from "./deleteTour";
 import { createPost } from "./createPost";
+import { createAcc } from "./createAcc";
 import { followHandler } from "./follow";
 
 // DOM ELEMENTS
@@ -15,6 +16,7 @@ const userDataForm = document.querySelector(".form-user-data");
 const postDataForm = document.querySelector(".form-post-data");
 const createPostDataForm = document.querySelector(".form-createPost-data");
 const userPasswordForm = document.querySelector(".form-user-password");
+const signUpForm = document.querySelector(".form-user-create");
 const deleteTour = document.querySelectorAll(".clickListen");
 const followButton = document.querySelector(".followButton");
 
@@ -97,6 +99,26 @@ if (userPasswordForm)
     document.getElementById("password-current").value = "";
     document.getElementById("password").value = "";
     document.getElementById("password-confirm").value = "";
+  });
+
+if (signUpForm)
+  signUpForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    document.querySelector(".btn--save-account").textContent = "signing up...";
+
+    const name = document.getElementById("name_create").value;
+    const email = document.getElementById("email_create").value;
+    // const photo = document.getElementById("photo").files[0];
+    const password = document.getElementById("password_create").value;
+    const passwordConfirm = document.getElementById("password_confirm_create")
+      .value;
+
+    await createAcc({ name, email, password, passwordConfirm }, "create");
+
+    // document.querySelector(".btn--save-password").textContent = "Save password";
+    // document.getElementById("password-current").value = "";
+    // document.getElementById("password").value = "";
+    // document.getElementById("password-confirm").value = "";
   });
 
 if (followButton) {

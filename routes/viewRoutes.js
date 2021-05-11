@@ -27,6 +27,7 @@ router.get("/edit/:slug", authController.isLoggedIn, viewsController.editTour);
 // );
 
 router.get("/login", authController.isLoggedIn, viewsController.getLoginForm);
+router.get("/signUp", viewsController.getSignUpForm);
 router.get("/me", authController.protect, viewsController.getAccount);
 
 router.post(

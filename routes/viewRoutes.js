@@ -11,6 +11,14 @@ router.get(
   // authController.isLoggedIn,
   viewsController.getMyTours
 );
+
+router.get(
+  "/myInterests",
+  authController.protect,
+  // authController.isLoggedIn,
+  viewsController.getMyInterests
+);
+
 router.get("/edit/:slug", authController.isLoggedIn, viewsController.editTour);
 // router.get(
 //   "/delete/:slug",

@@ -47,6 +47,45 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
     tours,
   });
 });
+exports.getMyInterests = catchAsync(async (req, res, next) => {
+  // 1) Get the data, for the requested tour (including reviews and guides)
+  // console.log("req.params.id =", req.params.id);
+  let followingIds = await User.findById(req.user.id).populate(
+    "following",
+    "id"
+  );
+  followingIds = followingIds.following;
+  // console.log("followingIds= ", followingIds);
+  const testTour = await Tour.find({ author: followingIds[0].id });
+  // console.log("testTour = ", testTour);
+
+  // console.log("followingIds[00000]= ", followingIds[0]);
+
+  let tours = await Promise.all(
+    followingIds.map(async (following) => {
+      // console.log(following);
+      const tour = await Tour.find({ author: following.id });
+      return tour;
+    })
+  );
+  tours = tours.flat();
+  // myAwesomeArray.map(x => x * x)
+  // console.log("tours = ", tours);
+  // console.log(tours.following[0].posts);
+  // const tours = await Tour.find({ author: req.params.id }).sort("-createdAt");
+
+  if (!tours) {
+    return next(new AppError("There is no posts", 404));
+  }
+
+  // // 2) Build template
+  // // 3) Render template using data from 1)
+  res.status(200).render("tours", {
+    title: `MY Interests`,
+    tours,
+    followers: true,
+  });
+});
 
 exports.editTour = catchAsync(async (req, res, next) => {
   // 1) Get the data, for the requested tour (including reviews and guides)

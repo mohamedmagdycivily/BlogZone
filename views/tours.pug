@@ -3,7 +3,7 @@ extends base
 block content
   main.main
     .card-container
-      if tours && user.id != tours[0].author.id 
+      if tours && user.id != tours[0].author.id && !followers
         if user.following.indexOf(tours[0].author.id ) >= 0
           button.btn.btn--small.btn--green.followButton(data-id=`${tours[0].author.id }` )= `UnFollow ${tours[0].author.name}`
         else 
@@ -40,6 +40,8 @@ block content
               if user.id == tour.author.id 
                 span
                   a.remove(href=`/edit/${tour.slug}`) Edit
+              else
+                span= tour.createdAt.toLocaleString('en-us', {month: 'long', year: 'numeric'})
             .card__data
               svg.card__icon
                 use(xlink:href='/img/icons.svg#icon-flag')
@@ -51,6 +53,9 @@ block content
               if user.id == tour.author.id 
                 span 
                   a.remove.clickListen(data-index-number=`${tour._id}` href=`#`) Delete
+              if followers
+                span 
+                  a.remove(href=`/myPosts/${tour.author.id}`)= tour.author.name
 
               
 

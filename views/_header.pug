@@ -2,7 +2,7 @@ header.header
   nav.nav.nav--tours
     a.nav__el(href='/') All posts
     if user
-      a.nav__el(href='#') interests
+      a.nav__el(href='/myInterests') interests
       a.nav__el(href=`/myPosts/${user._id}`) my posts
       a.nav__el(href='/create-post') New post
   .header__logo

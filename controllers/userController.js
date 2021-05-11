@@ -115,13 +115,16 @@ exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
 
 exports.updateFollowers = catchAsync(async (req, res, next) => {
-  // console.log("req.body = ", req.body);
-  // console.log("req.user.id= ", req.user.id);
   const user = await User.findById(req.user.id);
   const following = [...user.following, req.body.following];
   let doc;
-  if (user.following.indexOf(req.body.following) >= 1) {
+  // console.log(
+  //   "user.following.indexOf(req.body.following) = ",
+  //   user.following.indexOf(req.body.following)
+  // );
+  if (user.following.indexOf(req.body.following) >= 0) {
     console.log("un following ...");
+
     doc = await User.findByIdAndUpdate(
       req.user.id,
       { $pull: { following: req.body.following } },
@@ -132,6 +135,7 @@ exports.updateFollowers = catchAsync(async (req, res, next) => {
     );
   } else {
     console.log("following ...");
+    console.log("req.body.following = ", req.body.following);
     doc = await User.findByIdAndUpdate(
       req.user.id,
       { $push: { following: req.body.following } },

@@ -143,7 +143,7 @@ body {
 .heading-primary,
 .heading-tertirary {
   color: #fff;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-weight: 300;
 }
 .heading-primary span,
@@ -1425,10 +1425,15 @@ body {
 
 .search__input {
   outline-color: #7dd56f;
-  width: 20%;
+  width: 25%;
   height: 32px;
   border-radius: 3px;
   border: 1px solid #eaeaea;
   padding: 5px 10px;
   font-size: 12px;
+}
+.search {
+  background-color: #7dd56f;
+  color: #61cc51;
+  border: 2px solid #7dd56f; /* Green */
 }

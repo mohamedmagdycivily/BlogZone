@@ -20,10 +20,10 @@ exports.getOverview = catchAsync(async (req, res, next) => {
     if (searchBarTitle) filter.push({ title: searchBarTitle });
     if (searchBarAuthor) {
       let authorId = await User.findOne({ name: searchBarAuthor });
-      authorId = authorId.id;
+      if (authorId) authorId = authorId.id;
       filter.push({ author: authorId });
     }
-    console.log("filter = ", filter[0]);
+    console.log("filter = ", filter);
 
     tours = await Tour.find({
       $and: filter,
@@ -78,7 +78,7 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
 });
 exports.getMyInterests = catchAsync(async (req, res, next) => {
   // 1) Get the data, for the requested tour (including reviews and guides)
-  console.log("req.user.id =", req.user.id);
+  // console.log("req.user.id =", req.user.id);
   let followingIds = await User.findById(req.user.id).populate(
     "following",
     "id"

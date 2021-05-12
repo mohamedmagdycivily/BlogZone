@@ -2,15 +2,15 @@ extends base
 
 block content
   main.main
-    - console.log("in 🧑 ")
+    //- - console.log("in 🧑 ")
     .card-container
       if tours[0] && user.id != tours[0].author.id && !followers
-        - console.log("in first if")
+        //- - console.log("in first if")
         if user.following.indexOf(tours[0].author.id ) >= 0
-          - console.log("in 2-1 if")
+          //- - console.log("in 2-1 if")
           button.btn.btn--small.btn--green.followButton(data-id=`${tours[0].author.id }` )= `UnFollow ${tours[0].author.name}`
         else 
-          - console.log("in 2-1 if")
+          //- - console.log("in 2-1 if")
           button.btn.btn--small.btn--green.followButton(data-id=`${tours[0].author.id }` )= `Follow ${tours[0].author.name}`
       //- h1= user.following.includes(tours[0].author.id )
       //- - console.log("user.following = ", user.following)

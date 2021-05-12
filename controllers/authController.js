@@ -59,8 +59,8 @@ exports.signup = catchAsync(async (req, res, next) => {
   // } else {
   //   console.log("in else ");
   newUser = await User.create(data);
-  console.log("data🧮  = ", data);
-  console.log("newUser = ", newUser);
+  // console.log("data🧮  = ", data);
+  // console.log("newUser = ", newUser);
   // }
 
   createSendToken(newUser, 201, res);

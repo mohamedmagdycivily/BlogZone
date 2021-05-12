@@ -7,9 +7,10 @@ import { deleteTourFunc } from "./deleteTour";
 import { createPost } from "./createPost";
 import { createAcc } from "./createAcc";
 import { followHandler } from "./follow";
+import { displayFilteredTours } from "./FilteredTours";
 
 // DOM ELEMENTS
-const mapBox = document.getElementById("map");
+// const mapBox = document.getElementById("map");
 const loginForm = document.querySelector(".form--login");
 const logOutBtn = document.querySelector(".nav__el--logout");
 const userDataForm = document.querySelector(".form-user-data");
@@ -19,12 +20,39 @@ const userPasswordForm = document.querySelector(".form-user-password");
 const signUpForm = document.querySelector(".form-user-create");
 const deleteTour = document.querySelectorAll(".clickListen");
 const followButton = document.querySelector(".followButton");
+// const search = document.querySelector(".searchContainer");
+// const searchBarTitle = document.querySelector(".searchBarTitle");
+const searchBar = document.querySelectorAll(".search__input");
+const search = document.querySelector(".search");
+
+// console.log("searchBar = ", searchBar);
+// if (search) {
+//   let data = { title: "", author: "", tag: "" };
+//   searchBar.forEach((element) => {
+//     element.addEventListener("keyup", (e) => {
+//       e.preventDefault();
+//       if (e.target.name == "searchBarTitle") {
+//         data.title = e.target.value;
+//       } else if (e.target.name == "searchBarAuthor") {
+//         data.author = e.target.value;
+//       } else {
+//         data.tag = e.target.value;
+//       }
+//       // console.log(data);
+//     });
+//   });
+
+//   search.addEventListener("click", (e) => {
+//     // console.log(data);
+//     displayFilteredTours(data);
+//   });
+// }
 
 // DELEGATION
-if (mapBox) {
-  const locations = JSON.parse(mapBox.dataset.locations);
-  displayMap(locations);
-}
+// if (mapBox) {
+//   const locations = JSON.parse(mapBox.dataset.locations);
+//   displayMap(locations);
+// }
 
 if (loginForm)
   loginForm.addEventListener("submit", (e) => {
@@ -115,26 +143,81 @@ if (signUpForm)
       "passwordConfirm",
       document.getElementById("password_confirm_create").value
     );
-
-    // const name = document.getElementById("name_create").value;
-    // const email = document.getElementById("email_create").value;
-    // const photo = document.getElementById("photo").files[0];
-    // const password = document.getElementById("password_create").value;
-    // const passwordConfirm = document.getElementById("password_confirm_create")
-    //   .value;
-
     await createAcc(
       // { name, email, photo, password, passwordConfirm },
       form,
       "create"
     );
-
-    // document.querySelector(".btn--save-password").textContent = "Save password";
-    // document.getElementById("password-current").value = "";
-    // document.getElementById("password").value = "";
-    // document.getElementById("password-confirm").value = "";
   });
 
 if (followButton) {
   followButton.addEventListener("click", followHandler);
 }
+
+///////////////////////////////////////////////////////////////////////////
+
+// if (search) {
+//   console.log("in search");
+//   console.log(tours);
+//   const title = document.getElementById("searchBarTitle");
+//   const author = document.getElementById("searchBarAuthor");
+//   const tag = document.getElementById("searchBarTag");
+
+//   let data = { title: "", author: "", tag: "" };
+//   title.addEventListener("keyup", (e) => {
+//     data.title = e.target.value.toLowerCase();
+//     displayFilteredTours(data);
+//   });
+//   author.addEventListener("keyup", (e) => {
+//     data.author = e.target.value.toLowerCase();
+//     displayFilteredTours(data);
+//   });
+//   tag.addEventListener("keyup", (e) => {
+//     data.tag = e.target.value.toLowerCase();
+//     displayFilteredTours(data);
+//   });
+// }
+///////////////////////////////////////////////////////////////////////////////
+
+// const charactersList = document.getElementById("charactersList");
+// const searchBar = document.getElementById("searchBar");
+// let hpCharacters = [];
+
+// searchBar.addEventListener("keyup", (e) => {
+//   const searchString = e.target.value.toLowerCase();
+
+//   const filteredCharacters = hpCharacters.filter((character) => {
+//     return (
+//       character.name.toLowerCase().includes(searchString) ||
+//       character.house.toLowerCase().includes(searchString)
+//     );
+//   });
+//   displayCharacters(filteredCharacters);
+// });
+
+// const loadCharacters = async () => {
+//   try {
+//     const res = await fetch("https://hp-api.herokuapp.com/api/characters");
+//     hpCharacters = await res.json();
+//     displayCharacters(hpCharacters);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+
+// const displayCharacters = (characters) => {
+//   const htmlString = characters
+//     .map((character) => {
+//       return `
+//             <li class="character">
+//                 <h2>${character.name}</h2>
+//                 <p>House: ${character.house}</p>
+//                 <img src="${character.image}"></img>
+//             </li>
+//         `;
+//     })
+//     .join("");
+//   charactersList.innerHTML = htmlString;
+// };
+
+// loadCharacters();

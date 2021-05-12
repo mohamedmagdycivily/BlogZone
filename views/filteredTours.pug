@@ -3,16 +3,15 @@ extends base
 block content
   main.main
     .searchContainer
-      h1.heading-secondary.search  search
-      form(id="searchWrapper", action="/", method="get")
+      button.heading-secondary.search  search
+      div(id="searchWrapper")
         label.search_label(for="searchBarTitle")  Title
         input.search__input(type="text",name="searchBarTitle",id="searchBarTitle",placeholder="search for a tittle" )
         label.search_label(for="searchBarAuthor")  Author
         input.search__input(type="text",name="searchBarAuthor",id="searchBarAuthor",placeholder="search for a author" )
         label.search_label(for="searchBarTag")  Tag
         input.search__input(type="text",name="searchBarTag",id="searchBarTag",placeholder="search for a tag" )
-        br
-        input.heading-secondary.search(type="submit" ,value="Submit")
+
     .card-container
       //- have title, body, photo, author, and tags
       each tour in tours
@@ -26,8 +25,7 @@ block content
 
           .card__details
             h1.card__sub-heading= tour.author.name
-            -console.log(tour.body)
-            -text = tour.body.split(' ')[0] + ' .....'
+            -text = tour.body.split('.')[0] + ' .....'
             p.card__text= text
             .card__data
               svg.card__icon

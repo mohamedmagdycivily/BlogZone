@@ -75,6 +75,9 @@ exports.updatePost = catchAsync(async (req, res, next) => {
   }
   // console.log("req.body =", req.body);
   // 2) Filtered out unwanted fields names that are not allowed to be updated
+  console.log("req.body.tags after", req.body.tags);
+  req.body.tags = req.body.tags.split(" ");
+  console.log("req.body.tags after", req.body.tags);
   const filteredBody = filterObj(req.body, "title", "body", "tags");
   if (req.file) filteredBody.photo = req.file.filename;
   // 3) Update user document
@@ -83,7 +86,7 @@ exports.updatePost = catchAsync(async (req, res, next) => {
     new: true,
     runValidators: true,
   });
-
+  console.log("updatedPost = ", updatedPost);
   res.status(200).json({
     status: "success",
     data: {
@@ -103,6 +106,7 @@ exports.createPost = catchAsync(async (req, res, next) => {
   }
   // console.log("req.body =", req.body);
   // 2) Filtered out unwanted fields names that are not allowed to be updated
+  if (req.body.tags) req.body.tags = req.body.tags.split(" ");
   const filteredBody = filterObj(req.body, "title", "body", "tags");
   if (req.file) filteredBody.photo = req.file.filename;
   filteredBody.author = req.user.id;
@@ -112,7 +116,7 @@ exports.createPost = catchAsync(async (req, res, next) => {
   // console.log("filteredBody = ", filteredBody);
 
   const doc = await Tour.create(filteredBody);
-
+  console.log("the created doc = ", doc);
   res.status(200).json({
     status: "success",
     data: {

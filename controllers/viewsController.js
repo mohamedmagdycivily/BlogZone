@@ -4,11 +4,40 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 
 exports.getOverview = catchAsync(async (req, res, next) => {
-  // 1) Get tour data from collection
-  const tours = await Tour.find().sort("-createdAt");
+  let tours;
+  if (
+    req.query.searchBarTitle ||
+    req.query.searchBarAuthor ||
+    req.query.searchBarTag
+  ) {
+    let filter = [];
+    // console.log("req.query = ", req.query);
+    let { searchBarTitle, searchBarAuthor, searchBarTag } = req.query;
+    if (searchBarTag) {
+      searchBarTag = searchBarTag.split(" ");
+      filter.push({ tags: { $all: searchBarTag } });
+    }
+    if (searchBarTitle) filter.push({ title: searchBarTitle });
+    if (searchBarAuthor) {
+      let authorId = await User.findOne({ name: searchBarAuthor });
+      authorId = authorId.id;
+      filter.push({ author: authorId });
+    }
+    console.log("filter = ", filter[0]);
 
-  // 2) Build template
-  // 3) Render that template using tour data from 1)
+    tours = await Tour.find({
+      $and: filter,
+    }).sort("-createdAt");
+  } else {
+    tours = await Tour.find().sort("-createdAt");
+  }
+  // res.status(200).json({
+  //   status: "success",
+  //   length: tours.length,
+  //   data: {
+  //     tours,
+  //   },
+  // });
   res.status(200).render("overview", {
     title: "All Posts",
     tours,

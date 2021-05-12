@@ -11,7 +11,7 @@ const postSchema = new mongoose.Schema(
       // unique: true,
       trim: true,
       maxlength: [40, "A post name must have less or equal then 40 characters"],
-      minlength: [10, "A post name must have more or equal then 10 characters"],
+      minlength: [5, "A post name must have more or equal then 5 characters"],
       // validate: [validator.isAlpha, "Tour name must only contain characters"],
     },
     slug: String,
@@ -46,7 +46,6 @@ postSchema.pre("save", function(next) {
   this.slug = slugify(this.title, { lower: true });
   next();
 });
-
 // postSchema.post(/^findOneAnd/, function(doc, next) {
 //   console.log("in findOneAnd");
 //   this.slug = slugify(doc.title, { lower: true });

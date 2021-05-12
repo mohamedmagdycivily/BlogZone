@@ -1,13 +1,11 @@
 /* eslint-disable */
 import "@babel/polyfill";
-import { displayMap } from "./mapbox";
 import { login, logout } from "./login";
 import { updateSettings } from "./updateSettings";
 import { deleteTourFunc } from "./deleteTour";
 import { createPost } from "./createPost";
 import { createAcc } from "./createAcc";
 import { followHandler } from "./follow";
-import { displayFilteredTours } from "./FilteredTours";
 
 // DOM ELEMENTS
 // const mapBox = document.getElementById("map");
@@ -20,39 +18,6 @@ const userPasswordForm = document.querySelector(".form-user-password");
 const signUpForm = document.querySelector(".form-user-create");
 const deleteTour = document.querySelectorAll(".clickListen");
 const followButton = document.querySelector(".followButton");
-// const search = document.querySelector(".searchContainer");
-// const searchBarTitle = document.querySelector(".searchBarTitle");
-const searchBar = document.querySelectorAll(".search__input");
-const search = document.querySelector(".search");
-
-// console.log("searchBar = ", searchBar);
-// if (search) {
-//   let data = { title: "", author: "", tag: "" };
-//   searchBar.forEach((element) => {
-//     element.addEventListener("keyup", (e) => {
-//       e.preventDefault();
-//       if (e.target.name == "searchBarTitle") {
-//         data.title = e.target.value;
-//       } else if (e.target.name == "searchBarAuthor") {
-//         data.author = e.target.value;
-//       } else {
-//         data.tag = e.target.value;
-//       }
-//       // console.log(data);
-//     });
-//   });
-
-//   search.addEventListener("click", (e) => {
-//     // console.log(data);
-//     displayFilteredTours(data);
-//   });
-// }
-
-// DELEGATION
-// if (mapBox) {
-//   const locations = JSON.parse(mapBox.dataset.locations);
-//   displayMap(locations);
-// }
 
 if (loginForm)
   loginForm.addEventListener("submit", (e) => {

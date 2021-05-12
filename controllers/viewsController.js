@@ -23,7 +23,7 @@ exports.getOverview = catchAsync(async (req, res, next) => {
       if (authorId) authorId = authorId.id;
       filter.push({ author: authorId });
     }
-    console.log("filter = ", filter);
+    // console.log("filter = ", filter);
 
     tours = await Tour.find({
       $and: filter,

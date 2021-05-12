@@ -8,7 +8,7 @@ export const updateSettings = async (data, type) => {
     let url;
     if (type === "post") {
       const id = document.getElementById("title").dataset.indexNumber;
-      console.log(id);
+      // console.log(id);
       url = `http://127.0.0.1:3000/api/v1/posts/edit/${id}`;
     }
     if (type === "create") {

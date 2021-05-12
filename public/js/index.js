@@ -41,7 +41,6 @@ if (userDataForm) {
     form.append("name", document.getElementById("name").value);
     form.append("email", document.getElementById("email").value);
     form.append("photo", document.getElementById("photo").files[0]);
-    console.log("form = ", form);
 
     updateSettings(form, "data");
   });
@@ -55,7 +54,6 @@ if (postDataForm) {
     form.append("body", document.getElementById("body").value);
     form.append("tags", document.getElementById("tags").value);
     form.append("photo", document.getElementById("image").files[0]);
-    console.log("form = ", form);
 
     updateSettings(form, "post");
   });
@@ -69,8 +67,7 @@ if (createPostDataForm) {
     form.append("body", document.getElementById("body").value);
     form.append("tags", document.getElementById("tags").value);
     form.append("photo", document.getElementById("image").files[0]);
-    console.log("form = ", form);
-
+ 
     createPost(form, "create");
   });
 }

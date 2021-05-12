@@ -3,8 +3,8 @@ import axios from "axios";
 import { showAlert } from "./alerts";
 
 export const followHandler = async (e) => {
-  console.log("e.target.dataset.id =", e.target.dataset.id);
-  console.log(e.target.value);
+  // console.log("e.target.dataset.id =", e.target.dataset.id);
+  // console.log(e.target.value);
   try {
     const res = await axios({
       method: "patch",

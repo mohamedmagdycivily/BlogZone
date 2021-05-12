@@ -17,7 +17,7 @@ const factory = require("./handlerFactory");
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
-  console.log("file.mimetype = ", file.mimetype);
+  // console.log("file.mimetype = ", file.mimetype);
   if (file.mimetype.startsWith("image")) {
     cb(null, true);
   } else {
@@ -36,13 +36,13 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
   if (req.user) req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
   else req.file.filename = `user-${Date.now()}.jpeg`;
-  console.log("end of resizeUserPhoto");
+  // console.log("end of resizeUserPhoto");
   await sharp(req.file.buffer)
     .resize(500, 500)
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
     .toFile(`public/img/users/${req.file.filename}`);
-  console.log("end of resizeUserPhoto");
+  // console.log("end of resizeUserPhoto");
   next();
 });
 
@@ -74,7 +74,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(req.body, "name", "email");
   if (req.file) filteredBody.photo = req.file.filename;
   // 3) Update user document
-  console.log("filteredBody = ", filteredBody);
+  // console.log("filteredBody = ", filteredBody);
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,
     runValidators: true,
@@ -123,7 +123,7 @@ exports.updateFollowers = catchAsync(async (req, res, next) => {
   //   user.following.indexOf(req.body.following)
   // );
   if (user.following.indexOf(req.body.following) >= 0) {
-    console.log("un following ...");
+    // console.log("un following ...");
 
     doc = await User.findByIdAndUpdate(
       req.user.id,
@@ -134,8 +134,8 @@ exports.updateFollowers = catchAsync(async (req, res, next) => {
       }
     );
   } else {
-    console.log("following ...");
-    console.log("req.body.following = ", req.body.following);
+    // console.log("following ...");
+    // console.log("req.body.following = ", req.body.following);
     doc = await User.findByIdAndUpdate(
       req.user.id,
       { $push: { following: req.body.following } },

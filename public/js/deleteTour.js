@@ -10,7 +10,7 @@ export const deleteTourFunc = async (e) => {
       method: "DELETE",
       url: `http://127.0.0.1:3000/api/v1/posts/${e.target.dataset.indexNumber}`,
     });
-    console.log("res.status = ", res.data);
+    // console.log("res.status = ", res.data);
     if ((res.status = "success")) {
       showAlert("success", "Deleted successfully!");
       window.setTimeout(() => {
